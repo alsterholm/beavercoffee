@@ -17,6 +17,7 @@ const ProductsController = {
   		res.json(product);
   	});
   },
+  
 };
 
 module.exports = ProductsController;

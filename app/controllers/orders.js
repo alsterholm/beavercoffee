@@ -3,6 +3,11 @@ const Order = require('../models/order');
 const OrdersController = {
   show (req, res) {
     // Show a given order
+    Order.findOne({_id: req.params.id}, function(err, order) {
+      if(err)
+        res.send(err);
+      res.json(order);
+    });
   },
 
   store (req, res) {
