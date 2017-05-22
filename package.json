@@ -1,0 +1,24 @@
+{
+  "name": "beavercoffee",
+  "version": "1.0.0",
+  "description": "beavercoffee nosql school project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andreasindal/beavercoffee.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andreasindal/beavercoffee/issues"
+  },
+  "homepage": "https://github.com/andreasindal/beavercoffee#readme",
+  "dependencies": {
+    "dotenv": "^4.0.0",
+    "express": "^4.15.3",
+    "mongoose": "^4.10.1"
+  }
+}
