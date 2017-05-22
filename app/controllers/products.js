@@ -1,3 +1,5 @@
+const Product = require('../models/product');
+
 const ProductsController = {
   index (req, res) {
 
