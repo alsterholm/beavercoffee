@@ -5,7 +5,7 @@ const ProductsController = {
   	Product.find({}, function(err, products) {
   		if (err)
   			res.send(err);
-  		res.json({data: products});
+  		res.json(products);
   	});
   },
 

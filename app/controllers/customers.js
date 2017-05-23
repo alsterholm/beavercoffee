@@ -7,7 +7,7 @@ const CustomersController = {
     Customer.find({}, function (err, customers){
       if (err)
         res.send(err);
-      res.json({data: customers});
+      res.json(customers);
     });
   },
 

@@ -20,10 +20,16 @@ const OrdersController = {
 
   update (req, res) {
     // Update a given order
+    Order.findOneAndUpdate({_id: req.params.id}, req.body, function(err, order) {
+      if (err)
+        res.send(err);
+      res.json(order);
+    });
   },
 
   delete (req, res) {
     // Delete a given order
+    
   },
 };
 

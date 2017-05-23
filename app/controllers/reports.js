@@ -5,7 +5,7 @@ const ReportsController = {
     Order.find({}, function(err, orders) {
       if(err)
         res.send(err);
-      res.json({data: orders}); // todo count orders and sum sales!!
+      res.json(orders); // todo count orders and sum sales!!
     });
     // Generate a sales report
   },
@@ -14,7 +14,7 @@ const ReportsController = {
     Order.find({products: {_productId: req.params.product}}, function(err, orders) {
       if(err)
         res.send(err);
-      res.json({data: orders}); // todo count orders and sum sales!!
+      res.json(orders); // todo count orders and sum sales!!
     });
     // Generate a sales report for a given product
   },
@@ -29,7 +29,7 @@ const ReportsController = {
     Order.find({_employeeId: req.params.employee}, function(err, orders) {
       if(err)
         res.send(err);
-      res.json({data: orders}); // todo count orders and sum sales!!
+      res.json(orders); // todo count orders and sum sales!!
     });
     // Generate orders report for a given employee
   },
@@ -38,7 +38,7 @@ const ReportsController = {
     Order.find({_customerId: req.params.customer}, function(err, orders) {
       if(err)
         res.send(err);
-      res.json({data: orders}); // todo count orders and sum sales!!
+      res.json(orders); // todo count orders and sum sales!!
     });
     // Generate orders report for a given employee
   },
