@@ -31,11 +31,11 @@ const EmployeesController = {
       const newEmpl = {
         name: request.body.name || name,
         ssn: request.body.ssn || ssn,
-        address: request.body.address || address
+        address: request.body.address || address,
         _coffeeshopId: request.body._coffeeshopId || _coffeeshopId,
-        position: request.body.position || position
-        employmentPercent: request.body.employmentPercent || employmentPercent
-        startDate: request.body.startDate || startDate
+        position: request.body.position || position,
+        employmentPercent: request.body.employmentPercent || employmentPercent,
+        startDate: request.body.startDate || startDate,
         endDate: request.body.endDate || endDate
       };
 
