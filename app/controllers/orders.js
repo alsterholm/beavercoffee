@@ -43,11 +43,9 @@ const OrdersController = {
           // Decrease stock and calculate totalprice
           let total = 0;
           cs.products.forEach(p => {
-            console.log(p);
-            const prod = products.find(k => k._id == p._id)
+            const prod = products.find(k => k._id == p.id);
 
             if (prod) {
-              console.log(prod);
               p.quantity -= prod.quantity;
               total += p.price * prod.quantity;
             }
