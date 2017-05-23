@@ -4,7 +4,8 @@
   "description": "beavercoffee nosql school project",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,12 @@
   },
   "homepage": "https://github.com/andreasindal/beavercoffee#readme",
   "dependencies": {
+    "body-parser": "^1.17.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
     "mongoose": "^4.10.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
