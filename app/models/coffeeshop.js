@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
     zip:    String,
   },
   products: [{
+    _id: Schema.Type.ObjectId,
     name: String,
     quantity: Number,
     price: Number,

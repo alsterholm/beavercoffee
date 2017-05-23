@@ -11,23 +11,34 @@ const OrdersController = {
   },
 
   store (req, res) {
-    const products = req.body.products // ["ajwndjkakdniada2kawd", "andwkankjdnakuwdn"]
+    const products = req.body.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
+    const employee = req.body.employee;
+    const customer = req.body.customer;
 
-    Produt
-
-    Coffeeshop.findOne({_id: req.params.id}, (err, coffeeshop) => {
-      coffeshop.products.each(p => {
-        Products.update({ _id: p._id }, {
-          $dec: quantity
-        })
+    Coffeeshop.findOne({_id: req.params.id}, (err, cs) => {
+      const filteredProducts = coffeshop.products.filter(p => {
+        const productIds = products.map(k => k.id);
+        return productIds.contains(p._id);
       })
+
+      filteredProducts.forEach(p => {
+        if (p.quantity < products.find(k => k.id == p.id).quantity) {
+          return res.send('Cannot place order');
+        }
+      });
+
+      cs.products.forEach(p => {
+        p.quantity -= products.find(k => k.id == p.id).quantity;
+      });
+
+      cs.save();
+
+      Order.create({ some_fucking_data: ":)" }, (err, model) => {
+        if (err) console.log(err);
+
+        res.send(model);
+      });
     })
-
-    Order.create(req.body, (err, model) => {
-      if (err) console.log(err);
-
-      res.send(model);
-    });
   },
 
   update (req, res) {
