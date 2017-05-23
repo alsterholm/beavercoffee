@@ -12,6 +12,7 @@ routes.register = (app) => {
   app.put('/orders/:id', OrdersController.update);
   app.delete('/orders/:id', OrdersController.delete);
   app.post('/orders', OrdersController.store);
+  app.post('/orders/:id/finalize', OrdersController.finalize);
 
   app.get('/customers', CustomersController.index);
   app.get('/customers/:id', CustomersController.show);

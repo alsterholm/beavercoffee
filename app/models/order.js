@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
   _coffeshopId: mongoose.Schema.Types.ObjectId,
   date: Date,
   totalPrice: Number,
+  finalized: Boolean,
   products: [{
     _productId: mongoose.Schema.Types.ObjectId,
     name: String,

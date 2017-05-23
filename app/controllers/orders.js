@@ -1,5 +1,5 @@
 const Order = require('../models/order');
-const Coffeeshop = require('../models/coffeeshop'); 
+const Coffeeshop = require('../models/coffeeshop');
 
 const OrdersController = {
   show (req, res) {
@@ -13,31 +13,37 @@ const OrdersController = {
 
   store (req, res) {
     let body = req.body;
-    const products = body.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
 
-    Coffeeshop.findById(req.body._coffeeshopId, (err, cs) => {
-      if (err)
-        res.send(err);
+    Order.create(Object.assign({}, body, { finalized: false, date: new Date() }), (err, model) => {
+      if (err) console.log(err);
 
-      // Decrease stock and calculate totalprice
-      let total = 0;
-      cs.products.forEach(p => {
-        p.quantity -= products.find(k => k.id == p._id).quantity;
-        total += p.price * products.find(k => k.id == p._id).quantity;
-      });
-      body.totalPrice = total;
-      // save coffeeshop
-      cs.save();
-
-      // create order and save to db
-      body.date = new Date();
-      Order.create(body, (err, model) => {
-        if (err) console.log(err);
-
-        res.send(model);
-      });
+      res.send(model);
     });
   },
+
+  finalize (req, res) {
+    Order.findById(req.params.id, (err, o) => {
+      o.finalized = true;
+      o.save();
+
+      const products = o.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
+
+      Coffeeshop.findById(req.body._coffeeshopId, (err, cs) => {
+        if (err)
+          res.send(err);
+
+        // Decrease stock and calculate totalprice
+        let total = 0;
+        cs.products.forEach(p => {
+          p.quantity -= products.find(k => k.id == p._id).quantity;
+          total += p.price * products.find(k => k.id == p._id).quantity;
+        });
+        body.totalPrice = total;
+        // save coffeeshop
+        cs.save();
+      });
+    });
+  }
 
   update (req, res) {
     // Update a given order
