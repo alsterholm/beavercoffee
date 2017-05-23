@@ -12,6 +12,7 @@ const EmployeesController = {
 
   store (req, res) {
   	// create new employee
+  	req.body.startDate = new Date();
   	const new_employee = new Employee(req.body);
   	new_employee.save(function(err, employee) {
   		if(err)
@@ -22,6 +23,7 @@ const EmployeesController = {
 
   update (req, res) {
   	// update employee
+  	
   },
 
 };

@@ -24,44 +24,66 @@ const OrdersController = {
   finalize (req, res) {
     Order.findById(req.params.id, (err, o) => {
       const products = o.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
+      if (o.finalized) {
+        res.send("Already finalized")
+      } else {
 
-      Coffeeshop.findById(o._coffeeshopId, (err, cs) => {
-        if (err)
-          res.send(err);
+        Coffeeshop.findById(o._coffeeshopId, (err, cs) => {
+          if (err)
+            res.send(err);
 
-        // Decrease stock and calculate totalprice
-        let total = 0;
-        cs.products.forEach(p => {
-          const prod = products.find(k => k.id == p._id)
+          // Decrease stock and calculate totalprice
+          let total = 0;
+          cs.products.forEach(p => {
+            const prod = products.find(k => k.id == p._id)
 
-          if (prod) {
-            p.quantity -= prod.quantity;
-            total += p.price * prod.quantity;
-          }
+            if (prod) {
+              p.quantity -= prod.quantity;
+              total += p.price * prod.quantity;
+            }
+          });
+
+          o.totalPrice = total;
+          o.finalized = true;
+
+          o.save();
+          cs.save();
+          res.json(o);
         });
+      }
 
-        o.totalPrice = total;
-        o.finalized = true;
-
-        o.save();
-        cs.save();
-      });
     });
   },
 
   update (req, res) {
     // Update a given order
-    Order.findOneAndUpdate({_id: req.params.id}, req.body, function(err, order) {
+    Order.findById(req.params.id, function(err, order) {
       if (err)
         res.send(err);
-      res.json(order);
+      if(order.finalized) {
+        res.send("Already finalized");
+      } else {
+        order = req.body;
+        order.save();
+        res.json(order);
+      }
     });
   },
 
   delete (req, res) {
     // Delete a given order
-
+    Order.findById(req.params.id, function(err, order) {
+      if (err)
+        res.send(err);
+      if(order.finalized) {
+        res.send("Already finalized");
+      } else {
+        order.remove();
+        res.send("Order removed");
+      }
+    });
   },
+
 };
 
 module.exports = OrdersController;
