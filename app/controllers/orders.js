@@ -23,9 +23,6 @@ const OrdersController = {
 
   finalize (req, res) {
     Order.findById(req.params.id, (err, o) => {
-      o.finalized = true;
-      o.save();
-
       const products = o.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
 
       Coffeeshop.findById(o._coffeeshopId, (err, cs) => {
@@ -42,8 +39,11 @@ const OrdersController = {
             total += p.price * prod.quantity;
           }
         });
-        body.totalPrice = total;
-        // save coffeeshop
+
+        o.totalPrice = total;
+        o.finalized = true;
+
+        o.save();
         cs.save();
       });
     });
