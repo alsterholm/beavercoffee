@@ -2,6 +2,14 @@ const Order = require('../models/order');
 const Coffeeshop = require('../models/coffeeshop');
 
 const OrdersController = {
+  index (req, res) {
+    Order.find({}, function(err, orders) {
+      if(err)
+        res.send(err);
+      res.json(orders);
+    });
+  },
+
   show (req, res) {
     // Show a given order
     Order.findOne({_id: req.params.id}, function(err, order) {
@@ -35,9 +43,11 @@ const OrdersController = {
           // Decrease stock and calculate totalprice
           let total = 0;
           cs.products.forEach(p => {
-            const prod = products.find(k => k.id == p._id)
+            console.log(p);
+            const prod = products.find(k => k._id == p._id)
 
             if (prod) {
+              console.log(prod);
               p.quantity -= prod.quantity;
               total += p.price * prod.quantity;
             }

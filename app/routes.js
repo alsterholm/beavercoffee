@@ -8,6 +8,7 @@ const ProductsController = require('./controllers/products');
 const routes = {};
 
 routes.register = (app) => {
+  app.get('/orders', OrdersController.index);
   app.get('/orders/:id', OrdersController.show);
   app.put('/orders/:id', OrdersController.update);
   app.delete('/orders/:id', OrdersController.delete);
