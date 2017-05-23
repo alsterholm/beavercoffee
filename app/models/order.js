@@ -8,7 +8,7 @@ const schema = new mongoose.Schema({
   totalPrice: Number,
   finalized: Boolean,
   products: [{
-    _productId: mongoose.Schema.Types.ObjectId,
+    id: mongoose.Schema.Types.ObjectId,
     name: String,
     quantity: Number,
     price: Number,
