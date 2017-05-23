@@ -28,14 +28,16 @@ const OrdersController = {
 
       const products = o.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
 
-      Coffeeshop.findById(req.body._coffeeshopId, (err, cs) => {
+      Coffeeshop.findById(o._coffeeshopId, (err, cs) => {
         if (err)
-          res.send(err);
+          res.send(err);  
 
         // Decrease stock and calculate totalprice
         let total = 0;
         cs.products.forEach(p => {
-          p.quantity -= products.find(k => k.id == p._id).quantity;
+          console.log(products);
+          console.log(p);
+          p.quantity -= products.find(k => k._id == p._id).quantity;
           total += p.price * products.find(k => k.id == p._id).quantity;
         });
         body.totalPrice = total;
@@ -43,7 +45,7 @@ const OrdersController = {
         cs.save();
       });
     });
-  }
+  },
 
   update (req, res) {
     // Update a given order

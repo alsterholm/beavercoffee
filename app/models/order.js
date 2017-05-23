@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const schema = new mongoose.Schema({
   _customerId: mongoose.Schema.Types.ObjectId,
   _employeeId: mongoose.Schema.Types.ObjectId,
-  _coffeshopId: mongoose.Schema.Types.ObjectId,
+  _coffeeshopId: mongoose.Schema.Types.ObjectId,
   date: Date,
   totalPrice: Number,
   finalized: Boolean,
