@@ -1,4 +1,5 @@
 const Order = require('../models/order');
+const Coffeeshop = require('../models/coffeeshop'); 
 
 const OrdersController = {
   show (req, res) {
@@ -11,12 +12,18 @@ const OrdersController = {
   },
 
   store (req, res) {
-    const products = req.body.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
-    const employee = req.body.employee;
-    const customer = req.body.customer;
+    // res.json(req.body._coffeeshopId);
+    // return res.send("haha");
+    let body = req.body;
+    const products = body.products; // [{ id: "ajwndjkakdniada2kawd", quantity: 3 } ]
+    const employee = body._employeeId;
+    const customer = body._customerId;
+    const coffeeshop = body._coffeeshopId;
 
-    Coffeeshop.findOne({_id: req.params.id}, (err, cs) => {
-      const filteredProducts = coffeshop.products.filter(p => {
+    console.log(coffeeshop);
+    Coffeeshop.findById(req.body._coffeeshopId, (err, cs) => {
+      console.log(cs);
+      const filteredProducts = cs.products.filter(p => {
         const productIds = products.map(k => k.id);
         return productIds.contains(p._id);
       })
@@ -29,11 +36,14 @@ const OrdersController = {
 
       cs.products.forEach(p => {
         p.quantity -= products.find(k => k.id == p.id).quantity;
+        body.totalPrice += p.price * products.find(k => k.id == p.id).quantity;
       });
 
       cs.save();
 
-      Order.create({ some_fucking_data: ":)" }, (err, model) => {
+      body.date = new Date();
+
+      Order.create(body, (err, model) => {
         if (err) console.log(err);
 
         res.send(model);

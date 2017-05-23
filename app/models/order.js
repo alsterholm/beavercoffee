@@ -7,6 +7,7 @@ const schema = new mongoose.Schema({
   date: Date,
   totalPrice: Number,
   products: [{
+    _productId: mongoose.Schema.Types.ObjectId,
     name: String,
     quantity: Number,
     price: Number,
