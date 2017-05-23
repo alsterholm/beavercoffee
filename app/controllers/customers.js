@@ -33,7 +33,7 @@ const CustomersController = {
 
   update (req, res) {
     //updates a customer
-    Customer.findOneAndUpdate({_id: req.params.id}, req.body, function(err, customer) {
+    Customer.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, customer) {
       if (err)
         res.send(err);
       res.json(customer);
