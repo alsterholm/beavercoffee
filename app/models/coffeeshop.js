@@ -18,6 +18,6 @@ const schema = new mongoose.Schema({
   }],
 });
 
-const model = mongoose.model('Coffeshop', schema);
+const model = mongoose.model('Coffeeshop', schema);
 
 module.exports = model;
