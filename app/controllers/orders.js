@@ -30,15 +30,17 @@ const OrdersController = {
 
       Coffeeshop.findById(o._coffeeshopId, (err, cs) => {
         if (err)
-          res.send(err);  
+          res.send(err);
 
         // Decrease stock and calculate totalprice
         let total = 0;
         cs.products.forEach(p => {
-          console.log(products);
-          console.log(p);
-          p.quantity -= products.find(k => k._id == p._id).quantity;
-          total += p.price * products.find(k => k.id == p._id).quantity;
+          const prod = products.find(k => k.id == p._id)
+
+          if (prod) {
+            p.quantity -= prod.quantity;
+            total += p.price * prod.quantity;
+          }
         });
         body.totalPrice = total;
         // save coffeeshop
