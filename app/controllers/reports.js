@@ -1,13 +1,14 @@
 const Order = require('../models/order');
 
-const ReportsController = {
+const ReportsController = { 
   sales (req, res) {
-    Order.find({}, function(err, orders) {
+    //todo for a time period
+    Order.find({_coffeshopId: req.params.shop}, function(err, orders) {
       if(err)
         res.send(err);
       res.json(orders); // todo count orders and sum sales!!
     });
-    // Generate a sales report
+    // Generate a sales report for a time period!!!
   },
 
   products (req, res) {
