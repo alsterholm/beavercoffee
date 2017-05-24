@@ -1,15 +1,15 @@
-'use strict';
+const mongoose = require('mongoose');
+
+require('dotenv').config();
+const { DB_HOST, DB_DATABASE, PORT } = process.env;
+
+mongoose.connect('mongodb://' + DB_HOST + '/' + DB_DATABASE);
 
 const Coffeeshop = require('./models/coffeeshop');
 const Customer = require('./models/customer');
 const Employee = require('./models/employee');
 const Order = require('./models/order');
 const Product = require('./models/product');
-const mongoose = require('mongoose');
-
-
-// Fixa så vi kan använda env variablerna!! (Har kört en ny db: test1 endast för testning)
-// mongoose.connect('mongodb://localhost/test1');
 
 Product.remove({})
 	.then(() => {
