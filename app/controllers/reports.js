@@ -7,7 +7,7 @@ const ReportsController = {
     const where = shop ? { _coffeshopId: ObjectId(shop) } : {};
 
     if (req.query.from && req.query.to) {
-      where.date = { $gte: new Date(req.query.from), $lt: new Date(req.query.to) };
+      where.date = { $gte: Date.parse(req.query.from), $lt: Date.parse(req.query.to) };
     }
 
     Order.find(where, function(err, orders) {
