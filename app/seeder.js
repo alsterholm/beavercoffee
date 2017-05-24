@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 
 
 // Fixa så vi kan använda env variablerna!! (Har kört en ny db: test1 endast för testning)
-mongoose.connect('mongodb://localhost/test1');
+// mongoose.connect('mongodb://localhost/test1');
 
 Product.remove({})
 	.then(() => {

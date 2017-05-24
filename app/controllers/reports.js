@@ -1,41 +1,39 @@
 const Order = require('../models/order');
+const ObjectId = require('mongoose').Schema.Types.ObjectId
 
 const ReportsController = {
   sales (req, res) {
     //todo for a time period
     const shop = req.query.shop;
+    console.log(shop);
 
     if (shop) {
-      this.salesForShop(shop, req, res);
+      // this.salesForShop(shop, req, res);
+      Order.find({_coffeshopId: ObjectId(shop)}, function(err, orders) {
+        if (err) res.send(err);
+        console.log(orders);
+        const count = orders.length;
+        let revenue = 0;
+        for(let order of orders) {
+          revenue += order.totalPrice;
+        };
+
+        res.json({ count, revenue });
+      });
     } else {
-      this.salesForAllShops(req, res);
+      // this.salesForAllShops(req, res);
+      Order.find({}, function(err, orders) {
+        if (err) res.send(err);
+
+        const count = orders.length;
+        let revenue = 0;
+        for(let order of orders) {
+          revenue += order.totalPrice;
+        };
+        console.log(revenue);
+        res.json({ count, revenue });
+      });
     }
-  },
-
-  salesForShop (shop, req, res) {
-    Order.find({_coffeshopId: shop}, function(err, orders) {
-      if (err) res.send(err);
-
-      const count = orders.length;
-      const revenue = orders.reduce((acc, o) => {
-        acc + o.totalPrice;
-      }, 0);
-
-      res.json({ count, revenue });
-    });
-  },
-
-  salesForAllShops (req, res) {
-    Order.find({}, function(err, orders) {
-      if (err) res.send(err);
-
-      const count = orders.length;
-      const revenue = orders.reduce((acc, o) => {
-        acc + o.totalPrice;
-      }, 0);
-
-      res.json({ count, revenue });
-    });
   },
 
   products (req, res) {
