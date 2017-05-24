@@ -37,7 +37,7 @@ Update the given order. Only unfinalized orders can be updated. Send JSON data i
       name: String,
       quantity: Number,
       price: Number,
-      extras: [String],
+      extras: [String]
     }
   ]
 }
@@ -63,7 +63,7 @@ Create a new order. Send JSON data in the request body. Data should be structure
       name: String,
       quantity: Number,
       price: Number,
-      extras: [String],
+      extras: [String]
     }
   ]
 }
@@ -129,7 +129,7 @@ Create a new product. Send JSON data in the request body. Data should be structu
 
 ```js
 {
-  name: String,
+  name: String
 }
 ```
 
@@ -149,13 +149,13 @@ Create a new employee. Send JSON data in the request body. Data should be struct
     street: String,
     state: String,
     city: String,
-    zip: String,
+    zip: String
   },
   _coffeshopId: ObjectId,
   position: String,
   employmentPercent: Number,
   startDate: Date,
-  endDate: Date,
+  endDate: Date
 }
 ```
 
@@ -171,13 +171,13 @@ Update an existing employee. Send JSON data in the request body. Data should be 
     street: String,
     state: String,
     city: String,
-    zip: String,
+    zip: String
   },
   _coffeshopId: ObjectId,
   position: String,
   employmentPercent: Number,
   startDate: Date,
-  endDate: Date,
+  endDate: Date
 }
 ```
 
