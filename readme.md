@@ -130,7 +130,6 @@ Create a new product. Send JSON data in the request body. Data should be structu
 ```js
 {
   name: String,
-  unit: String
 }
 ```
 
