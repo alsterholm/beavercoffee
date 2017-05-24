@@ -181,6 +181,18 @@ Update an existing employee. Send JSON data in the request body. Data should be 
 }
 ```
 
+
+**POST** `/employees/:id/comments`
+
+Create a new comment on a employee. Send JSON data in the request body. Data should be structured as following:
+
+```js
+{
+  _authorId: ObjectId,
+  text: String
+}
+```
+
 **GET** `/reports/sales`
 
 Get a report of all sales. Optional `shop` query parameter can be supplied with the id of a coffeeshop, then filters the sales to only contain orders of that shop.
