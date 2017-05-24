@@ -1,14 +1,41 @@
 const Order = require('../models/order');
 
-const ReportsController = { 
+const ReportsController = {
   sales (req, res) {
     //todo for a time period
-    Order.find({_coffeshopId: req.params.shop}, function(err, orders) {
-      if(err)
-        res.send(err);
-      res.json(orders); // todo count orders and sum sales!!
+    const shop = req.query.shop;
+
+    if (shop) {
+      this.salesForShop(shop, req, res);
+    } else {
+      this.salesForAllShops(req, res);
+    }
+  },
+
+  salesForShop (shop, req, res) {
+    Order.find({_coffeshopId: shop}, function(err, orders) {
+      if (err) res.send(err);
+
+      const count = orders.length;
+      const revenue = orders.reduce((acc, o) => {
+        acc + o.totalPrice;
+      }, 0);
+
+      res.json({ count, revenue });
     });
-    // Generate a sales report for a time period!!!
+  },
+
+  salesForAllShops (req, res) {
+    Order.find({}, function(err, orders) {
+      if (err) res.send(err);
+
+      const count = orders.length;
+      const revenue = orders.reduce((acc, o) => {
+        acc + o.totalPrice;
+      }, 0);
+
+      res.json({ count, revenue });
+    });
   },
 
   products (req, res) {
