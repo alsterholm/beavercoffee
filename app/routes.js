@@ -30,10 +30,7 @@ routes.register = (app) => {
   app.post('/employees/:id/comments', EmployeeCommentsController.store);
 
   app.get('/reports/sales', ReportsController.sales);
-  app.get('/reports/sales/:product', ReportsController.products);
-  app.get('/reports/sales/geography', ReportsController.geography);
   app.get('/reports/orders/:employee', ReportsController.employees);
-  app.get('/reports/orders/:customers', ReportsController.customers);
 };
 
 module.exports = routes;
